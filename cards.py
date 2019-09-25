@@ -3,9 +3,10 @@ import sys
 import os
 from enum import Enum
 
-###author:  margaret swarts
-###date:    8/20/19
-###description: This file is an implementation of a deck of cards
+# author:  margaret swarts
+# date:    8/20/19
+# description: This file is an implementation of a deck of cards
+
 
 class Suit(Enum):
     HEART = 1
@@ -13,13 +14,15 @@ class Suit(Enum):
     SPADE = 3
     CLUB = 4
 
+
 class card:
     def __init__(self, rank, Suit, value):
         self.rank = rank
         self.Suit = Suit
         self.value = value
 
-#create deck
+
+# create deck
 deck = []
 
 for count1 in range(1, 5):
@@ -29,10 +32,11 @@ for count1 in range(1, 5):
                 i.rank = count2
                 i.Suit = count1
                 if(count3 < 11):
-                    i.vlaue = count3
+                    i.value = count3
                 else:
                     i.value = 10
                 deck.append(i)
+
 
 def print_card(deck, x):
     if(deck[x].Suit ==1):
