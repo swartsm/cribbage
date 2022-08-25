@@ -2,6 +2,7 @@ import random
 import sys
 import os
 from enum import Enum
+from itertools import combinations
 
 # author:  margaret swarts
 # date:    8/20/19
@@ -91,6 +92,9 @@ hand5 = [test_hand[0], test_hand[1], test_hand[3], test_hand[5]]
 hand6 = [test_hand[0], test_hand[1], test_hand[4], test_hand[5]]
 hand7 = [test_hand[0], test_hand[2], test_hand[3], test_hand[4]]
 hand8 = [test_hand[0], test_hand[2], test_hand[3], test_hand[5]]
+#for x in range(6):
+my_hand = combinations([0, 1, 2, 3, 4, 5], 4)
+print("my hand: ", list(my_hand))
 
 for v in range(0, 6):
     print_card(test_hand, v)
@@ -115,7 +119,7 @@ for v in range(0, 6):
 #    print_card(pc_hand, a)
 
 pc_hand_points = 0
-player_hand_points = 0;
+player_hand_points = 0
 
 #pc_hand.sort(key= lambda x: x.rank)
 #my_hand.sort(key= lambda x: x.rank)
