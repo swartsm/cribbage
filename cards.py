@@ -94,10 +94,35 @@ hand7 = [test_hand[0], test_hand[2], test_hand[3], test_hand[4]]
 hand8 = [test_hand[0], test_hand[2], test_hand[3], test_hand[5]]
 #for x in range(6):
 my_hand = combinations([0, 1, 2, 3, 4, 5], 4)
-print("my hand: ", list(my_hand))
+combos = []
+for combination in combinations([0, 1, 2, 3, 4, 5], 4):
+    varr = list(combination)
+    combos.append(varr)
+    #hand = [test_hand[a], test_hand[b], test_hand[c], test_hand[d]]
+    #print(test_hand[a])
+    hand = [test_hand[varr[0]], test_hand[varr[1]], test_hand[varr[2]], test_hand[varr[3]]]
+    for x in range(4):
+        print_card(hand, x)
+    print()
+    #print(varr)
+#print("my hand: ", list(my_hand))
+"""
+#print(combos)
+for x in range(len(combos)):
+    sublist = combos[x]
+    hand = []
+    print("sublist", sublist)
+    for y in range(4):
+        #hand1= [test_hand[0]]
+        hand.append([test_hand[sublist[y]]])
+        #print(hand1)
+    for v in range(len(hand)):
+        print_card(hand, v)
 
-for v in range(0, 6):
-    print_card(test_hand, v)
+#print(list(my_hand[0]))
+"""
+#for v in range(0, 6):
+    #print_card(test_hand, v)
 
 #random.shuffle(deck)
 
@@ -203,9 +228,12 @@ def evaluate_hand(hand, crib, low, high):
 #print(evaluate_hand(my_hand, crib, 1, 4))
 #print("points in my hand[2,5]: ")
 #print(evaluate_hand(my_hand, crib, 2, 5))
+"""
 print("points in my hand[0, 1, 2, 3]: ")
 print(evaluate_hand(hand1, crib, 0, 3))
 print("points in my hand[0, 1, 2, 4]: ")
 print(evaluate_hand(hand2, crib, 0, 3))
 print("points in my hand[0, 1, 4, 5]: ")
 print(evaluate_hand(hand6, crib, 0, 3))
+"""
+#for x in range(15):
