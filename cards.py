@@ -95,17 +95,7 @@ hand8 = [test_hand[0], test_hand[2], test_hand[3], test_hand[5]]
 #for x in range(6):
 my_hand = combinations([0, 1, 2, 3, 4, 5], 4)
 combos = []
-for combination in combinations([0, 1, 2, 3, 4, 5], 4):
-    varr = list(combination)
-    combos.append(varr)
-    #hand = [test_hand[a], test_hand[b], test_hand[c], test_hand[d]]
-    #print(test_hand[a])
-    hand = [test_hand[varr[0]], test_hand[varr[1]], test_hand[varr[2]], test_hand[varr[3]]]
-    for x in range(4):
-        print_card(hand, x)
-    print()
-    #print(varr)
-#print("my hand: ", list(my_hand))
+
 """
 #print(combos)
 for x in range(len(combos)):
@@ -214,6 +204,13 @@ def evaluate_hand(hand, crib, low, high):
     #            points += 4
 
     return points
+def check_fifteens(hand, hand_size):
+    points = 0
+    for i in range(hand_size -1):
+        for j in range(i, hand_size):
+            if hand[i].value + hand[j].value == 15:
+                points+=2
+    return points
 
 #lowNum = 0
 #highNum = 3
@@ -236,4 +233,18 @@ print(evaluate_hand(hand2, crib, 0, 3))
 print("points in my hand[0, 1, 4, 5]: ")
 print(evaluate_hand(hand6, crib, 0, 3))
 """
-#for x in range(15):
+for combination in combinations([0, 1, 2, 3, 4, 5], 4):
+    #varr is each combination
+    varr = list(combination)
+    #combos is a list of the combinations
+    combos.append(varr)
+    #create hand for each combination
+    hand = [test_hand[varr[0]], test_hand[varr[1]], test_hand[varr[2]], test_hand[varr[3]]]
+    #print hand
+    for x in range(4):
+        print_card(hand, x)
+    #evaluate the hand and print
+    points = evaluate_hand(hand, crib, 0, 3)
+    print(check_fifteens(hand, 4))
+    print(points)
+    print()
