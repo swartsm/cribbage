@@ -17,9 +17,9 @@ class Suit(Enum):
 
 
 class card:
-    def __init__(self, rank, Suit, value):
+    def __init__(self, rank, suit, value):
         self.rank = rank
-        self.Suit = Suit
+        self.suit = suit
         self.value = value
 
 
@@ -40,7 +40,7 @@ for count1 in range(1, 5):
 
 
 def print_card(deck, x):
-    if(deck[x].Suit ==1):
+    if(deck[x].suit ==1):
         if(deck[x].rank == 11):
             print('Jack of Hearts')
         elif(deck[x].rank == 12):
@@ -49,7 +49,7 @@ def print_card(deck, x):
             print('King of Hearts')
         else:
             print(deck[x].rank, 'of Hearts')
-    elif(deck[x].Suit == 2):
+    elif(deck[x].suit == 2):
         if(deck[x].rank == 11):
             print('Jack of Diamonds')
         elif(deck[x].rank == 12):
@@ -58,7 +58,7 @@ def print_card(deck, x):
             print('King of Diamonds')
         else:
             print(deck[x].rank, 'of Diamonds')
-    elif(deck[x].Suit == 3):
+    elif(deck[x].suit == 3):
         if(deck[x].rank == 11):
             print('Jack of Spades')
         elif(deck[x].rank == 12):
@@ -83,6 +83,7 @@ my_hand = []
 crib = []
 test_hand = [card(5, 1, 5), card(5, 2, 5), card(12, 1, 10), card(13, 1, 10), card(3, 4, 3), card(3, 2, 3)]
 test_hand2 = [card(6, 1, 6), card(6, 2, 6), card(6, 4, 6), card(3, 1, 3), card(3, 3, 3), card(1, 1, 1)]
+test_hand3 = [card(1, 1, 1), card(2, 1, 2), card(3, 1, 3), card(10, 1, 10), card(11, 2, 10), card(12, 3, 10)]
 
 #test_hand combos
 hand1 = [test_hand[0], test_hand[1], test_hand[2], test_hand[3]]
@@ -247,6 +248,25 @@ def check_ofakinds(hand, hand_size):
                 points += 2
     return points
 
+def check_flush(hand, hand_size):
+    points = 0
+    card_suit = hand[0].suit
+    for i in range(1, hand_size):
+        if hand[i].suit != card_suit:
+            return points
+    return 4
+
+def check_run(hand, hand_size):
+    points = 0
+    #first = hand[0].rank
+    for i in range(hand_size-1):
+        if hand[i+1].rank - hand[i].rank == 1:
+            points+=1
+    if points >=3:
+        return points
+    else:
+        return 0 
+
 #lowNum = 0
 #highNum = 3
 #highNum += 5
@@ -267,7 +287,7 @@ for combination in combinations([0, 1, 2, 3, 4, 5], 4):
     #combos is a list of the combinations
     combos.append(varr)
     #create hand for each combination
-    hand = [test_hand2[varr[0]], test_hand2[varr[1]], test_hand2[varr[2]], test_hand2[varr[3]]]
+    hand = [test_hand3[varr[0]], test_hand3[varr[1]], test_hand3[varr[2]], test_hand3[varr[3]]]
     #print hand
     for x in range(4):
         print_card(hand, x)
@@ -275,5 +295,7 @@ for combination in combinations([0, 1, 2, 3, 4, 5], 4):
     #points = evaluate_hand(hand, crib, 0, 3)
     print(check_fifteens(hand, 4))
     print(check_ofakinds(hand, 4))
+    print(check_flush(hand, 4))
+    print(check_run(hand, 4))
     #print(points)
     print()
