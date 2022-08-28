@@ -82,6 +82,7 @@ pc_hand = []
 my_hand = []
 crib = []
 test_hand = [card(5, 1, 5), card(5, 2, 5), card(12, 1, 10), card(13, 1, 10), card(3, 4, 3), card(3, 2, 3)]
+test_hand2 = [card(6, 1, 6), card(6, 2, 6), card(6, 4, 6), card(3, 1, 3), card(3, 3, 3), card(1, 1, 1)]
 
 #test_hand combos
 hand1 = [test_hand[0], test_hand[1], test_hand[2], test_hand[3]]
@@ -206,10 +207,44 @@ def evaluate_hand(hand, crib, low, high):
     return points
 def check_fifteens(hand, hand_size):
     points = 0
-    for i in range(hand_size -1):
-        for j in range(i, hand_size):
-            if hand[i].value + hand[j].value == 15:
+    #running_total = 0
+    fullsum = 0
+    for x in range(hand_size):
+        fullsum += hand[x].value
+    # if all cards add up to 15, we are done
+    if fullsum == 15:
+        points += 2
+    else:
+        #if all but one card adds up to 15:
+        for y in range(hand_size):
+            if fullsum - hand[y].value == 15:
                 points+=2
+        for i in range(hand_size -1):
+            running_total = hand[i].value
+            for j in range(i+1, hand_size):
+                sum = hand[i].value + hand[j].value
+                if sum == 15:
+                    points+=2
+                """
+                elif sum < 15:
+                    running_total+=hand[j].value
+                if running_total == 15:
+                    points+=2
+                    running_total = 0
+                elif running_total > 15:
+                    running_total -= hand[j].value
+                """
+                    
+    return points
+
+def check_ofakinds(hand, hand_size):
+    points = 0
+    for i in range(hand_size-1):
+        for j in range(i+1, hand_size):
+            #print("hjand i rank", hand[i].rank)
+            #print("hand[j].rank", hand[j].rank)
+            if hand[i].rank == hand[j].rank:
+                points += 2
     return points
 
 #lowNum = 0
@@ -225,26 +260,20 @@ def check_fifteens(hand, hand_size):
 #print(evaluate_hand(my_hand, crib, 1, 4))
 #print("points in my hand[2,5]: ")
 #print(evaluate_hand(my_hand, crib, 2, 5))
-"""
-print("points in my hand[0, 1, 2, 3]: ")
-print(evaluate_hand(hand1, crib, 0, 3))
-print("points in my hand[0, 1, 2, 4]: ")
-print(evaluate_hand(hand2, crib, 0, 3))
-print("points in my hand[0, 1, 4, 5]: ")
-print(evaluate_hand(hand6, crib, 0, 3))
-"""
+#Evaluate all combinations of 4 in the given hand
 for combination in combinations([0, 1, 2, 3, 4, 5], 4):
     #varr is each combination
     varr = list(combination)
     #combos is a list of the combinations
     combos.append(varr)
     #create hand for each combination
-    hand = [test_hand[varr[0]], test_hand[varr[1]], test_hand[varr[2]], test_hand[varr[3]]]
+    hand = [test_hand2[varr[0]], test_hand2[varr[1]], test_hand2[varr[2]], test_hand2[varr[3]]]
     #print hand
     for x in range(4):
         print_card(hand, x)
     #evaluate the hand and print
-    points = evaluate_hand(hand, crib, 0, 3)
+    #points = evaluate_hand(hand, crib, 0, 3)
     print(check_fifteens(hand, 4))
-    print(points)
+    print(check_ofakinds(hand, 4))
+    #print(points)
     print()
