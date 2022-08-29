@@ -257,11 +257,16 @@ def check_flush(hand, hand_size):
     return 4
 
 def check_run(hand, hand_size):
-    points = 0
+    points = 1
     #first = hand[0].rank
     for i in range(hand_size-1):
         if hand[i+1].rank - hand[i].rank == 1:
-            points+=1
+            if i < 2:
+                points+=1
+            elif hand[i+1].rank - hand[i-1].rank == 2:
+                points+=1
+        #print("diff", hand[i+1].rank - hand[i].rank)
+        #print("points", points)
     if points >=3:
         return points
     else:
