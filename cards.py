@@ -86,6 +86,7 @@ test_hand2 = [card(6, 1, 6), card(6, 2, 6), card(6, 4, 6), card(3, 1, 3), card(3
 test_hand3 = [card(1, 1, 1), card(2, 1, 2), card(3, 1, 3), card(10, 1, 10), card(11, 2, 10), card(12, 3, 10)]
 
 #test_hand combos
+"""
 hand1 = [test_hand[0], test_hand[1], test_hand[2], test_hand[3]]
 hand2 = [test_hand[0], test_hand[1], test_hand[2], test_hand[4]]
 hand3 = [test_hand[0], test_hand[1], test_hand[2], test_hand[5]]
@@ -94,6 +95,7 @@ hand5 = [test_hand[0], test_hand[1], test_hand[3], test_hand[5]]
 hand6 = [test_hand[0], test_hand[1], test_hand[4], test_hand[5]]
 hand7 = [test_hand[0], test_hand[2], test_hand[3], test_hand[4]]
 hand8 = [test_hand[0], test_hand[2], test_hand[3], test_hand[5]]
+"""
 #for x in range(6):
 my_hand = combinations([0, 1, 2, 3, 4, 5], 4)
 combos = []
@@ -135,11 +137,12 @@ for x in range(len(combos)):
 #for a in range(0, 6):
 #    print_card(pc_hand, a)
 
-pc_hand_points = 0
-player_hand_points = 0
+#pc_hand_points = 0
+#player_hand_points = 0
 
 #pc_hand.sort(key= lambda x: x.rank)
 #my_hand.sort(key= lambda x: x.rank)
+"""
 
 def evaluate_hand(hand, crib, low, high):
     points = 0
@@ -185,6 +188,7 @@ def evaluate_hand(hand, crib, low, high):
         points += 2
     if(hand[low+2].rank == hand[high].rank):
         points += 2
+    """
 
     #check for runs
     #sort cards by rank
@@ -205,7 +209,6 @@ def evaluate_hand(hand, crib, low, high):
     #            print("still equal")
     #            points += 4
 
-    return points
 def check_fifteens(hand, hand_size):
     points = 0
     #running_total = 0
@@ -272,19 +275,9 @@ def check_run(hand, hand_size):
     else:
         return 0 
 
-#lowNum = 0
-#highNum = 3
-#highNum += 5
-#print('highnum is now' , highNum)
-#testNum = my_hand[0].rank + my_hand[1].rank
+total_points = 0
+max_points_four = 0
 
-#print('testNum: ', testNum)
-#print("points in my hand[0,3]: ")
-#print(evaluate_hand(my_hand, crib, 0, 3))
-#print("points in my hand[1,4]: ")
-#print(evaluate_hand(my_hand, crib, 1, 4))
-#print("points in my hand[2,5]: ")
-#print(evaluate_hand(my_hand, crib, 2, 5))
 #Evaluate all combinations of 4 in the given hand
 for combination in combinations([0, 1, 2, 3, 4, 5], 4):
     #varr is each combination
@@ -298,9 +291,13 @@ for combination in combinations([0, 1, 2, 3, 4, 5], 4):
         print_card(hand, x)
     #evaluate the hand and print
     #points = evaluate_hand(hand, crib, 0, 3)
-    print(check_fifteens(hand, 4))
-    print(check_ofakinds(hand, 4))
-    print(check_flush(hand, 4))
-    print(check_run(hand, 4))
-    #print(points)
-    print()
+    #print(check_fifteens(hand, 4))
+    #print(check_ofakinds(hand, 4))
+    #print(check_flush(hand, 4))
+    #print(check_run(hand, 4))
+    total_points = check_fifteens(hand, 4) + check_ofakinds(hand, 4) + check_flush(hand, 4) + check_run(hand, 4)
+    #print(total_points)
+    max_points_four = max(total_points, max_points_four)
+    print("max points", max_points_four)
+
+    
