@@ -24,8 +24,30 @@ class card:
 
 
 # create deck
-deck = []
+class Deck:
+    def __init__(self):
+        self.cards = []
+        self.build()
+    
+    def build(self):
+        for s in Suit:
+            for v in range(1, 14):
+                if v < 11:
+                    self.cards.append(card(v, s, v))
+                elif v == 11:
+                    self.cards.append(card(v, s, 10))
+                elif v == 12:
+                    self.cards.append(card(v, s, 10))
+                elif v == 13:
+                    self.cards.append(card(v, s, 10))
+        
 
+deck = Deck()
+
+
+                
+
+# this isn't right. Size is 676? 
 for count1 in range(1, 5):
     for count2 in range(1, 14):
         for count3 in range(1, 14):
@@ -38,6 +60,7 @@ for count1 in range(1, 5):
                     i.value = 10
                 deck.append(i)
 
+print(len(deck))
 
 def print_card(deck, x):
     if(deck[x].suit ==1):
@@ -85,6 +108,8 @@ test_hand = [card(5, 1, 5), card(5, 2, 5), card(12, 1, 10), card(13, 1, 10), car
 test_hand2 = [card(6, 1, 6), card(6, 2, 6), card(6, 4, 6), card(3, 1, 3), card(3, 3, 3), card(1, 1, 1)]
 test_hand3 = [card(1, 1, 1), card(2, 1, 2), card(3, 1, 3), card(10, 1, 10), card(11, 2, 10), card(12, 3, 10)]
 
+
+
 #test_hand combos
 """
 hand1 = [test_hand[0], test_hand[1], test_hand[2], test_hand[3]]
@@ -97,8 +122,8 @@ hand7 = [test_hand[0], test_hand[2], test_hand[3], test_hand[4]]
 hand8 = [test_hand[0], test_hand[2], test_hand[3], test_hand[5]]
 """
 #for x in range(6):
-my_hand = combinations([0, 1, 2, 3, 4, 5], 4)
-combos = []
+#my_hand = combinations([0, 1, 2, 3, 4, 5], 4)
+#combos = []
 
 """
 #print(combos)
@@ -118,24 +143,24 @@ for x in range(len(combos)):
 #for v in range(0, 6):
     #print_card(test_hand, v)
 
-#random.shuffle(deck)
+random.shuffle(deck)
 
-#for x in range(1, 7):
-#    x = deck.pop()
-#    my_hand.append(x)
+for x in range(1, 7):
+    x = deck.pop()
+    my_hand.append(x)
 
-#print('player hand: ')
-#for y in range(0, 6):
-#    print_card(my_hand, y)
+print('player hand: ')
+for y in range(0, 6):
+    print_card(my_hand, y)
 
 
-#for z in range(1, 7):
-#    z = deck.pop()
-#    pc_hand.append(z)
+for z in range(1, 7):
+    z = deck.pop()
+    pc_hand.append(z)
 
-#print('computer hand: ')
-#for a in range(0, 6):
-#    print_card(pc_hand, a)
+print('computer hand: ')
+for a in range(0, 6):
+    print_card(pc_hand, a)
 
 #pc_hand_points = 0
 #player_hand_points = 0
@@ -277,6 +302,7 @@ def check_run(hand, hand_size):
 
 total_points = 0
 max_points_four = 0
+combos = []
 
 #Evaluate all combinations of 4 in the given hand
 for combination in combinations([0, 1, 2, 3, 4, 5], 4):
@@ -285,10 +311,10 @@ for combination in combinations([0, 1, 2, 3, 4, 5], 4):
     #combos is a list of the combinations
     combos.append(varr)
     #create hand for each combination
-    hand = [test_hand3[varr[0]], test_hand3[varr[1]], test_hand3[varr[2]], test_hand3[varr[3]]]
+    hand = [my_hand[varr[0]], my_hand[varr[1]], my_hand[varr[2]], my_hand[varr[3]]]
     #print hand
-    for x in range(4):
-        print_card(hand, x)
+    #for x in range(4):
+        #print_card(hand, x)
     #evaluate the hand and print
     #points = evaluate_hand(hand, crib, 0, 3)
     #print(check_fifteens(hand, 4))
@@ -298,6 +324,6 @@ for combination in combinations([0, 1, 2, 3, 4, 5], 4):
     total_points = check_fifteens(hand, 4) + check_ofakinds(hand, 4) + check_flush(hand, 4) + check_run(hand, 4)
     #print(total_points)
     max_points_four = max(total_points, max_points_four)
-    print("max points", max_points_four)
+    #print("max points", max_points_four)
 
     
