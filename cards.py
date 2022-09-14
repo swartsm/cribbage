@@ -16,11 +16,14 @@ class Suit(Enum):
     CLUB = 4
 
 
-class card:
+class Card:
     def __init__(self, rank, suit, value):
         self.rank = rank
         self.suit = suit
         self.value = value
+    
+    def show(self):
+        print("{} of {}, value {}".format(self.rank, self.suit, self.value))
 
 
 # create deck
@@ -33,20 +36,37 @@ class Deck:
         for s in Suit:
             for v in range(1, 14):
                 if v < 11:
-                    self.cards.append(card(v, s, v))
+                    self.cards.append(Card(v, s, v))
                 elif v == 11:
-                    self.cards.append(card(v, s, 10))
+                    self.cards.append(Card(v, s, 10))
                 elif v == 12:
-                    self.cards.append(card(v, s, 10))
+                    self.cards.append(Card(v, s, 10))
                 elif v == 13:
-                    self.cards.append(card(v, s, 10))
+                    self.cards.append(Card(v, s, 10))
+    
+    def show(self):
+        for c in self.cards:
+            c.show()
+
+    def shuffle(self):
+        for i in range(len(self.cards) -1, 0, -1):
+            r = random.randint(0, i)
+            self.cards[i], self.cards[r] = self.cards[r], self.cards[i]
+    
+    def drawCard(self):
+        return self.cards.pop()
+   
         
-
 deck = Deck()
+#deck.show()
 
 
-                
-
+deck.shuffle()
+#deck.show()
+card = deck.drawCard()
+card.show()
+             
+"""
 # this isn't right. Size is 676? 
 for count1 in range(1, 5):
     for count2 in range(1, 14):
@@ -59,8 +79,9 @@ for count1 in range(1, 5):
                 else:
                     i.value = 10
                 deck.append(i)
+"""
 
-print(len(deck))
+#print(len(deck))
 
 def print_card(deck, x):
     if(deck[x].suit ==1):
@@ -104,9 +125,9 @@ def print_card(deck, x):
 pc_hand = []
 my_hand = []
 crib = []
-test_hand = [card(5, 1, 5), card(5, 2, 5), card(12, 1, 10), card(13, 1, 10), card(3, 4, 3), card(3, 2, 3)]
-test_hand2 = [card(6, 1, 6), card(6, 2, 6), card(6, 4, 6), card(3, 1, 3), card(3, 3, 3), card(1, 1, 1)]
-test_hand3 = [card(1, 1, 1), card(2, 1, 2), card(3, 1, 3), card(10, 1, 10), card(11, 2, 10), card(12, 3, 10)]
+#test_hand = [card(5, 1, 5), card(5, 2, 5), card(12, 1, 10), card(13, 1, 10), card(3, 4, 3), card(3, 2, 3)]
+#test_hand2 = [card(6, 1, 6), card(6, 2, 6), card(6, 4, 6), card(3, 1, 3), card(3, 3, 3), card(1, 1, 1)]
+#test_hand3 = [card(1, 1, 1), card(2, 1, 2), card(3, 1, 3), card(10, 1, 10), card(11, 2, 10), card(12, 3, 10)]
 
 
 
@@ -143,7 +164,9 @@ for x in range(len(combos)):
 #for v in range(0, 6):
     #print_card(test_hand, v)
 
-random.shuffle(deck)
+#random.shuffle(deck)
+
+"""
 
 for x in range(1, 7):
     x = deck.pop()
@@ -161,6 +184,8 @@ for z in range(1, 7):
 print('computer hand: ')
 for a in range(0, 6):
     print_card(pc_hand, a)
+
+"""
 
 #pc_hand_points = 0
 #player_hand_points = 0
@@ -304,6 +329,8 @@ total_points = 0
 max_points_four = 0
 combos = []
 
+"""
+
 #Evaluate all combinations of 4 in the given hand
 for combination in combinations([0, 1, 2, 3, 4, 5], 4):
     #varr is each combination
@@ -327,3 +354,4 @@ for combination in combinations([0, 1, 2, 3, 4, 5], 4):
     #print("max points", max_points_four)
 
     
+"""
