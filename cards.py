@@ -58,13 +58,14 @@ class Deck:
    
         
 deck = Deck()
-#deck.show()
+#deck.show() 
 
 
 deck.shuffle()
 #deck.show()
 card = deck.drawCard()
 card.show()
+# test
              
 """
 # this isn't right. Size is 676? 
